@@ -16,7 +16,7 @@ import org.usfirst.frc6413.SteamWorks.commands.*;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -49,6 +49,22 @@ public class Arm extends Subsystem {
 
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
+    }
+    
+    public void closeArm() {
+    	openClose.set(Value.kForward);
+    }
+    
+    public void openArm() {
+    	openClose.set(Value.kReverse);
+    }
+    
+    public void lowerArm() {
+    	upDown.set(Value.kReverse);
+    }
+    
+    public void raiseArm() {
+    	upDown.set(Value.kForward);
     }
 }
 
