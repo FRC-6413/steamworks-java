@@ -58,12 +58,12 @@ public class Arm extends Subsystem {
     
     public void closeArm() {
     	openClose.set(Value.kForward);
-    	
-    	//armController.setRumble(RumbleType.kLeftRumble, 1);
+    	System.out.println("close arm");
     }
     
     public void openArm() {
     	openClose.set(Value.kReverse);
+    	//System.out.println("open arm");
     }
     
     public void lowerArm() {

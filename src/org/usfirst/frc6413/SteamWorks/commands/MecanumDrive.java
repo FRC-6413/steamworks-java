@@ -46,11 +46,12 @@ public class MecanumDrive extends Command {
     	Robot.driveBase.mecanumDrive(Robot.oi.driveJoystick);
     	
     	
-    	if(RobotMap.armGearTrigger.get() == true) {
+    	/*if(RobotMap.armGearTrigger.get() == true) {
     		if(Robot.oi.armJoystick.getBumper(GenericHID.Hand.kLeft) != true && Robot.oi.armJoystick.getBumper(GenericHID.Hand.kRight) != true) {
-    			Robot.arm.closeArm();
+    			
+    			System.out.println("closing from gear switch press");
     		}
-    	}
+    	} */
     }
 
     // Make this return true when this Command no longer needs to run execute()

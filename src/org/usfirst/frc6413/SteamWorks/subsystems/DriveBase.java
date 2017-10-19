@@ -86,6 +86,8 @@ public class DriveBase extends Subsystem {
 			lFM.changeControlMode(TalonControlMode.PercentVbus);
 			lRM.changeControlMode(TalonControlMode.PercentVbus);
 			
+			
+			
 			//System.out.println(lFM.getSpeed());
 			
 			robotDrive41.mecanumDrive_Cartesian(x, y, rotation, 0);		
@@ -138,7 +140,7 @@ public class DriveBase extends Subsystem {
 	    	lRM.changeControlMode(TalonControlMode.Speed);
 	    	lRM.set(leftTargetSpeed);	
 	    	
-	    	sb.append("\tspd:");
+	    	/*sb.append("\tspd:");
 	    	sb.append(lFM.getSpeed());
 	    	sb.append("\terr:");
 	    	sb.append(lFM.getClosedLoopError());
@@ -146,14 +148,29 @@ public class DriveBase extends Subsystem {
 	    	sb.append(leftTargetSpeed);
 	    	if(++loops >= 10) {
 	    		loops = 0;
-	    		//System.out.println(sb.toString());
-	    	}
+	    		//System.out.println(sb.toString());*/
+	    	
 		}
 	}
 
+	public void driveCount() {
+		lFM.changeControlMode(TalonControlMode.Position);
+		lFM.set(1000);
+	}
+	
 	public void driveForward(double speed) {
 		// need to reverse the right side, due to setup of mecanum drive
-		robotDrive41.tankDrive(speed, -speed);
+		lFM.changeControlMode(TalonControlMode.PercentVbus);
+		lFM.set(speed);
+		
+		rFM.changeControlMode(TalonControlMode.PercentVbus);
+		rFM.set(speed);
+		
+		lRM.changeControlMode(TalonControlMode.PercentVbus);
+		lRM.set(speed);
+		
+		rRM.changeControlMode(TalonControlMode.PercentVbus);
+		rRM.set(speed);
 	}
 
 	public double getDistanceBehind() {
