@@ -11,6 +11,8 @@
 
 package org.usfirst.frc6413.SteamWorks.subsystems;
 
+import java.util.Date;
+
 import org.usfirst.frc6413.SteamWorks.Robot;
 import org.usfirst.frc6413.SteamWorks.RobotMap;
 import org.usfirst.frc6413.SteamWorks.commands.*;
@@ -57,21 +59,25 @@ public class Arm extends Subsystem {
     }
     
     public void closeArm() {
-    	openClose.set(Value.kForward);
+    	openClose.set(Value.kForward);    	
     	System.out.println("close arm");
     }
     
     public void openArm() {
     	openClose.set(Value.kReverse);
-    	//System.out.println("open arm");
+    	RobotMap.ArmDownTime = new Date();
     }
     
     public void lowerArm() {
     	upDown.set(Value.kReverse);
+    	System.out.println("lowering arm");
+    	
     }
     
     public void raiseArm() {
-    	upDown.set(Value.kForward);
+    	upDown.set(Value.kForward);    
+    	System.out.println("raising arm");
+    	
     }
 }
 

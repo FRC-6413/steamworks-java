@@ -6,5 +6,6 @@ public class CenterPeg extends CommandGroup {
 
 	public CenterPeg() {
 		addSequential(new DriveToPeg());
+		addSequential(new OpenJaws());
 	}
 }

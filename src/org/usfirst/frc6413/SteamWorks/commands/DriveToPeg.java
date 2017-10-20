@@ -1,23 +1,25 @@
 package org.usfirst.frc6413.SteamWorks.commands;
 
 import org.usfirst.frc6413.SteamWorks.Robot;
+import org.usfirst.frc6413.SteamWorks.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveToPeg extends Command {
 	private PIDController pid;
 	
-	public DriveToPeg(){
+	public DriveToPeg(){		
 		double distance = .2;
 		
 		requires(Robot.driveBase);
-		double kP = -10;
-		double kI = 0;
-		double kD = 0;
+		double kP = -.4;
+		double kI = 1;
+		double kD = 5;
 		
 		pid = new PIDController(kP, kI, kD, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
@@ -45,11 +47,20 @@ public class DriveToPeg extends Command {
 		});
 		pid.setAbsoluteTolerance(0.01);
 		pid.setSetpoint(distance);
-		pid.setOutputRange(0, .6);
+		pid.setOutputRange(0, .35);
+		
+		SmartDashboard.putData("driveToPeg", pid);
 	}
 
 	// Called just before this Command runs the first time
     protected void initialize() {
+    	RobotMap.ArmIsUp = false;
+    	double distance = .2;
+    	
+    	pid.setAbsoluteTolerance(0.01);
+		pid.setSetpoint(distance);
+		pid.setOutputRange(0, .35);    	
+    	
     	pid.reset();
 		pid.enable();
 		System.out.println("Staring drive to peg");

@@ -44,7 +44,7 @@ public class DriveBase extends Subsystem {
 	private final CANTalon rFM = RobotMap.driveBaseRFM;
 	private final CANTalon rRM = RobotMap.driveBaseRRM;
 	private final RobotDrive robotDrive41 = RobotMap.driveBaseRobotDrive41;
-	private final AnalogInput rearUltrasonic = RobotMap.driveBaseRearUltrasonic;
+	//private final AnalogInput rearUltrasonic = RobotMap.driveBaseRearUltrasonic;
 	private final AnalogInput frontUltrasonic = RobotMap.driveBaseFrontUltrasonic;
 
 	private int loops = 0;
@@ -86,16 +86,12 @@ public class DriveBase extends Subsystem {
 			lFM.changeControlMode(TalonControlMode.PercentVbus);
 			lRM.changeControlMode(TalonControlMode.PercentVbus);
 			
-			
-			
-			//System.out.println(lFM.getSpeed());
-			
 			robotDrive41.mecanumDrive_Cartesian(x, y, rotation, 0);		
 		}
 		else {
 			y = y * -1;
-			sb.append("rawx:" + rotation + ", rawy:" + y);
-			double motorOutput = lFM.getOutputVoltage() / lFM.getBusVoltage();
+			//sb.append("rawx:" + rotation + ", rawy:" + y);
+			//double motorOutput = lFM.getOutputVoltage() / lFM.getBusVoltage();
 			
 			double z = Math.sqrt(rotation * rotation + y * y);
 			double rad = Math.acos(Math.abs(rotation)/z);
@@ -107,8 +103,8 @@ public class DriveBase extends Subsystem {
 			
 			double move = Math.max(Math.abs(y), Math.abs(rotation));
 			
-			double left;
-			double right;
+			double left = 0;
+			double right = 0;
 			
 			if ((rotation >= 0 && y >=0) || (rotation < 0 && y < 0))
 			{
@@ -130,6 +126,9 @@ public class DriveBase extends Subsystem {
 	    	rFM.changeControlMode(TalonControlMode.Speed);
 	    	rFM.set(rightTargetSpeed);
 	    	
+	    	//rRM.changeControlMode(TalonControlMode.Follower);
+	    	//rRM.set(0);
+	    	
 	    	rRM.changeControlMode(TalonControlMode.Speed);
 	    	rRM.set(rightTargetSpeed);
 	    	
@@ -137,19 +136,11 @@ public class DriveBase extends Subsystem {
 	    	lFM.changeControlMode(TalonControlMode.Speed);
 	    	lFM.set(leftTargetSpeed);
 	    	
+	    	//lRM.changeControlMode(TalonControlMode.Follower);
+	    	//lRM.set(1);
+	    	
 	    	lRM.changeControlMode(TalonControlMode.Speed);
-	    	lRM.set(leftTargetSpeed);	
-	    	
-	    	/*sb.append("\tspd:");
-	    	sb.append(lFM.getSpeed());
-	    	sb.append("\terr:");
-	    	sb.append(lFM.getClosedLoopError());
-	    	sb.append("\ttrg:");
-	    	sb.append(leftTargetSpeed);
-	    	if(++loops >= 10) {
-	    		loops = 0;
-	    		//System.out.println(sb.toString());*/
-	    	
+	    	lRM.set(leftTargetSpeed);	    	
 		}
 	}
 
@@ -173,9 +164,9 @@ public class DriveBase extends Subsystem {
 		rRM.set(speed);
 	}
 
-	public double getDistanceBehind() {
-		return rearUltrasonic.getAverageVoltage();
-	}
+	//public double getDistanceBehind() {
+	//	return rearUltrasonic.getAverageVoltage();
+	//}
 
 	public double getDistanceAhead() {
 		return frontUltrasonic.getAverageVoltage();

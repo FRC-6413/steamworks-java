@@ -11,6 +11,9 @@
 
 package org.usfirst.frc6413.SteamWorks.commands;
 import edu.wpi.first.wpilibj.command.Command;
+
+import java.util.Date;
+
 import org.usfirst.frc6413.SteamWorks.Robot;
 import org.usfirst.frc6413.SteamWorks.RobotMap;
 
@@ -41,12 +44,24 @@ public class ArmUp extends Command {
     protected void initialize() {
     	//setTimeout(1); 
     	System.out.println("ArmUp: " + RobotMap.ArmIsUp);
-    	if(RobotMap.ArmIsUp) {
-    		Robot.arm.lowerArm();
-    		//RobotMap.ArmDownDebounce = true;
+    	if(RobotMap.ArmIsUp == true) {
+    		//Robot.arm.lowerArm();
+    		RobotMap.ArmIsUp = false;
+    		
+    		// this is really lowering the arm.... dont' ask, I'm running out of time to debug
+    		Robot.arm.raiseArm();
+    		
+    		RobotMap.ArmDownTime = new Date();
+    		System.out.println("arm down time: " + RobotMap.ArmDownTime);
     	} 
     	else {
-    		Robot.arm.raiseArm();
+    		//Robot.arm.raiseArm();
+    		RobotMap.ArmIsUp = true;
+    		
+    		
+    		Robot.arm.lowerArm();
+    		//Date foo = new java.util.Date();
+    		
     	}     	
     }
 
@@ -62,7 +77,7 @@ public class ArmUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	RobotMap.ArmIsUp = !RobotMap.ArmIsUp;
+    	//RobotMap.ArmIsUp = !RobotMap.ArmIsUp;
     	//RobotMap.ArmDownDebounce = false;
     }
 

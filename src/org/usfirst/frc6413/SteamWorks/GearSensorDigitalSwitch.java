@@ -7,6 +7,5 @@ public class GearSensorDigitalSwitch extends Button {
 	@Override
 	public boolean get() {
 		return RobotMap.armGearTrigger.get();
-	}
-
+	}	
 }
