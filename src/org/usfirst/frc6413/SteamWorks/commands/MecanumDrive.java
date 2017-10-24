@@ -10,8 +10,10 @@
 
 
 package org.usfirst.frc6413.SteamWorks.commands;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc6413.SteamWorks.Robot;
+import org.usfirst.frc6413.SteamWorks.RobotMap;
 
 /**
  *
@@ -42,6 +44,14 @@ public class MecanumDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.driveBase.mecanumDrive(Robot.oi.driveJoystick);
+    	
+    	
+    	/*if(RobotMap.armGearTrigger.get() == true) {
+    		if(Robot.oi.armJoystick.getBumper(GenericHID.Hand.kLeft) != true && Robot.oi.armJoystick.getBumper(GenericHID.Hand.kRight) != true) {
+    			
+    			System.out.println("closing from gear switch press");
+    		}
+    	} */
     }
 
     // Make this return true when this Command no longer needs to run execute()
