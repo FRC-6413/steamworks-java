@@ -1,24 +1,22 @@
-package org.usfirst.frc6413.SteamWorks.commands;
+package org.usfirst.frc6413.PowerUp.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import org.usfirst.frc6413.PowerUp.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc6413.SteamWorks.Robot;
-import org.usfirst.frc6413.SteamWorks.RobotMap;
 
-public class OpenJaws extends Command {
-
-	public OpenJaws() {
-		requires(Robot.arm);
+public class ShiftLowGear extends Command {
+	
+	public ShiftLowGear() {
+		requires(Robot.driveBase);
 	}
 	
-	
-	protected void initialize() {    	
-    	
+	protected void initialize() {  	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	  	Robot.arm.openArm();
+		System.out.println("ShiftLowCommand");
+	  	Robot.driveBase.shiftLowGear(); 
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,4 +33,5 @@ public class OpenJaws extends Command {
     protected void interrupted() {
     	end();
     }
+
 }
