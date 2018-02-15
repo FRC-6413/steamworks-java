@@ -59,6 +59,8 @@ public class OI {
     public JoystickButton shifterButton; 
     public JoystickButton shifterButtonBack;
     
+    public JoystickButton elevatorButtonUp;
+    
     public JoystickButton testButton;
     
     public DigitalInput armTrigger;
@@ -79,6 +81,8 @@ public class OI {
     	shifterButtonBack = new JoystickButton(driveJoystick, 5);
     	shifterButtonBack.whenPressed(new ShiftHighGear());
     	
+    	elevatorButtonUp = new JoystickButton(armJoystick, 3);
+    	elevatorButtonUp.whenPressed(new MoveElevator());
     	//1/20/2018 Update
     	/*if(!shifted) {
     		shifted = true;

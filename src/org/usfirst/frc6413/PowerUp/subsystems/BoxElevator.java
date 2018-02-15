@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 import org.usfirst.frc6413.PowerUp.RobotMap;
 import org.usfirst.frc6413.PowerUp.commands.MecanumDriveClass;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.XboxController;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class BoxElevator extends Subsystem {
 
 	VictorSP elevatorController = RobotMap.ElevatorController;
+	Encoder elevatorEncoder = RobotMap.ElevatorEncoder;
 	
 	@Override
 	protected void initDefaultCommand() {
@@ -22,9 +24,25 @@ public class BoxElevator extends Subsystem {
 	
 	public void MoveElevator(XboxController controller)
 	{
-		double speed = deadZoneInput(controller.getY(GenericHID.Hand.kRight), 0.3);
 		
-		elevatorController.set(speed);
+		int encoderCount = elevatorEncoder.get();
+		System.out.println(encoderCount);
+		if(encoderCount < 500 && encoderCount >= 0) {
+			
+			double speed = deadZoneInput(controller.getY(GenericHID.Hand.kRight), 0.3)*-1;
+			
+			elevatorController.set(speed);
+		}
+		
+		/*
+		while(encoderCount < 500) {
+			elevatorController.set(0.5);
+		}
+		
+		elevatorController.set(0.0);
+		*/
+		
+		
 	}
 
 	private double deadZoneInput(double input, double deadZone) {

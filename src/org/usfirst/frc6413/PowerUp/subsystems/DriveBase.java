@@ -116,69 +116,13 @@ public class DriveBase extends Subsystem implements PIDOutput {
 	}
 
 	public void arcadeDriveMethod(XboxController controller) {		
-	  //double x = deadZoneInput(controller.getX(GenericHID.Hand.kLeft), .3) * -1; 
-	  //double y = deadZoneInput(controller.getY(GenericHID.Hand.kLeft), .1) * .6; 
-	  //double rotation = deadZoneInput(controller.getX(GenericHID.Hand.kRight), .1) * .75;
-	  
-	  /*if(controller.getTriggerAxis(GenericHID.Hand.kRight) != 0.0) {
-			double trigger = controller.getTriggerAxis(GenericHID.Hand.kRight);
-			y = y * (trigger + 1);
-			rotation = rotation * (1-(trigger*.5));
-	  } */
-		  
+		
 	  	//new StringBuilder();
 		double x = deadZoneInput(controller.getX(GenericHID.Hand.kRight), 0.3) * 1;
 		double y = deadZoneInput(controller.getY(GenericHID.Hand.kLeft), 0.1) * -1;
 		
-		/*lFM.set(ControlMode.PercentOutput, 0.5);
-		
-		rFM.set(ControlMode.PercentOutput, 0.5);
-		
-		lRM.set(ControlMode.PercentOutput, 0.5);
-		
-		rRM.set(ControlMode.PercentOutput, 0.5); */
-		
-		//NAVX test code. Deleting later. Re-tune degrees on metal chassis
-        	if (controller.getRawButton(2)) {
-        		/* While this button is held down, rotate to target angle.  
-        		 * Since a Tank drive system cannot move forward simultaneously 
-        		 * while rotating, all joystick input is ignored until this
-        		 * button is released. */
-        		 
-        		turnController.setSetpoint(89.75f);
-        		turnController.enable();
-        		rightStickValue = rotateToAngleRate;
-        	} else if (controller.getRawButton(1)) {
-        		turnController.setSetpoint(179.0f);
-        		turnController.enable();
-        		rightStickValue = rotateToAngleRate;
-        		System.out.println(ahrs.getAngle());
-        	} else if (controller.getRawButton(3)) {
-        		turnController.setSetpoint(-90.0f);
-        		turnController.enable();
-        		rightStickValue = rotateToAngleRate;
-        		System.out.println(ahrs.getAngle());
-        	} else if(controller.getRawButton(4)) {
-        		turnController.setSetpoint(0.0f);
-        		turnController.enable();
-        		rightStickValue = rotateToAngleRate;
-        		System.out.println(ahrs.getAngle());
-        	} else {
-        		turnController.disable();
-        		rightStickValue = x;
-        	}
-            Timer.delay(0.005);
-		
-		robotDrive41.arcadeDrive(y, rightStickValue);
-		//robotDrive41.arcadeDrive(y, x);
-		lFM.configOpenloopRamp(0.2, 0);
-		rFM.configOpenloopRamp(0.2, 0);
-		lRM.configOpenloopRamp(0.2, 0);
-		rRM.configOpenloopRamp(0.2, 0);
-		lMM.configOpenloopRamp(0.2, 0);
-		rMM.configOpenloopRamp(0.2, 0);
-		
-			
+		//robotDrive41.arcadeDrive(y, rightStickValue);
+		robotDrive41.arcadeDrive(y, x);			
 	}
 
 	public void driveCount() {
