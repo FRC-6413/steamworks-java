@@ -4,17 +4,17 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import org.usfirst.frc6413.PowerUp.RobotMap;
-import org.usfirst.frc6413.PowerUp.commands.MecanumDriveClass;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class BoxElevator extends Subsystem {
 
-	VictorSP elevatorController = RobotMap.ElevatorController;
+	WPI_TalonSRX elevatorController = RobotMap.ElevatorController;
 	Encoder elevatorEncoder = RobotMap.ElevatorEncoder;
 	
 	@Override
@@ -33,16 +33,13 @@ public class BoxElevator extends Subsystem {
 			
 			elevatorController.set(speed);
 		}
-		
 		/*
 		while(encoderCount < 500) {
 			elevatorController.set(0.5);
 		}
 		
 		elevatorController.set(0.0);
-		*/
-		
-		
+		*/		
 	}
 
 	private double deadZoneInput(double input, double deadZone) {
